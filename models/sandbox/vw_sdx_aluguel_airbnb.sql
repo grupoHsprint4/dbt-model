@@ -1,5 +1,4 @@
 
-{{ config(materialized='view') }}
 
 with dados_aluguel as (
     select distinct

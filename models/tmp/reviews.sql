@@ -6,11 +6,6 @@
     em todas as partes do arquivo de uma vez.
 */
 
-{{ 
-    config(
-           materialized='table'
-          ) 
-}}
 
 with reviews_union as (
     select *
