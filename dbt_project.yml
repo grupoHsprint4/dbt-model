@@ -35,5 +35,14 @@ models:
   inside_airbnb_project:
     # Applies to all files under models/example/
     tmp:
-      materialized: table
-    materialized: table
+      +materialized: table
+    
+    dim:
+      +materialized: table
+
+    fato:
+      +materialized: table
+
+    sandbox:
+      +materialized: view
+

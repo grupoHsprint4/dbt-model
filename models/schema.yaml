@@ -15,7 +15,7 @@ sources:
       - name: reviews
   
   - name: dw_data
-    schema: dw_schema
+    schema: airbyte_schema
     database: airbyte_database
 
     tables:
@@ -29,6 +29,7 @@ sources:
       - name: ft_aluguel_airbnb
       - name: ft_contagio_mes
       - name: ft_aluguel_airbnb_mes
+      - name: reviews
 
 
 models:
