@@ -95,6 +95,7 @@ sources:
   - name: dw_data
     schema: airbyte_schema
     database: airbyte_database
+    description: Schema para criação do Data Warehouse.
 
     tables:
       - name: dim_bairro
@@ -261,5 +262,76 @@ sources:
 
 models:
   - name: reviews
+    description: modelo para unificação das tabelas de review.
 
-  
+  - name: dim_bairro
+    description:  modelo para criação da dimensão de bairro.
+    columns:
+      - name: id_bairro
+        description: primary key
+        test:
+          - unique
+          - not null
+
+  - name: dim_faixa_etaria
+    description: modelo para criação da dimensão de faixa etaria.
+    columns:
+      - name: id_faixa_etaria
+        description: primary key
+        test:
+          - unique
+          - not null
+
+  - name: dim_imovel
+    description:  modelo para criação da dimensão de imóvel.
+    columns:
+      - name: id_imovel
+        description: primary key
+        test: 
+          - unique
+          - not null
+
+  - name: dim_proprietario
+    description: modelo para criação da dimensão de proprietrário.
+    columns:
+      - name: id_proprietario
+        description: primary key
+        test:
+          - unique
+          - not null
+
+  - name: dim_raca
+    description: modelo para criaçãoda dimensão de raça.
+    columns:
+      - name: id_raca
+        description: primary key
+        test: 
+          - unique
+          - not null
+
+  - name: dim_sexo
+    description: modelo para criaçãoda dimensão de sexo.
+    columns:
+      - name: id_sexo
+        description: primary key
+        test: 
+          - unique
+          - not null  
+
+  - name: ft_aluguel_airbnb
+    description: modelo para criação da fato de locação do airbnb.
+
+  - name: ft_aluguel_airbnb_mes
+    description: modelo para criação da fato de locação do airbnb agregada por mês.
+
+  - name: ft_contagio
+    description: modelo para criação da fato de contagio do covid no estado do Rio de Janeiro.
+
+  - name: ft_contagio_mes
+    description: modelo para criação da fato de contagio do covid no estado do Rio de Janeiro agregada por mês.  
+
+  - name: vw_sdx_airbnb_covid
+    description: modelo para criação de view com informações relacionadas as locações do airbnb e indicadores do covid.
+
+  - name: vw_sdx_aluguel_airbnb
+    description: modelo para criação de view com informações das locações do airbnb.
