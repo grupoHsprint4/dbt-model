@@ -1,4 +1,10 @@
+/*
+     Processo de carga da Fato com as informações de do COVID no estado do Rio de Janeiro 
+     agregado por mês.
 
+     Possui métricas de QT_Morte, QT_Casos_Ativos, QT_Casos e QT_Recuperados.
+
+*/
 
 
 with contagio_mes as (

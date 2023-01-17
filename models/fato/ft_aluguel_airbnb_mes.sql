@@ -1,5 +1,8 @@
+/*
+     Processo de carga da Fato com as informações de aluguel do airbnb agregadas por mês.
 
-
+     Criação de métrica de quantidade de locações por mês.
+*/
 
 with aluguel_mes as (
     select substr(DT_MOVIMENTO, 1, 6) as MES_MOVIMENTO,

@@ -1,7 +1,7 @@
 /*
+    Processo para carga da informação de sexo. 
 
-
-
+    A origem deste processo é o arquivo de COVID.
 */
 
 

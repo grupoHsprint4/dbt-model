@@ -1,6 +1,6 @@
-
-
-{{ config(materialized='view') }}
+/*
+    Processo de criação de uma view para analise de correlação entre COVID e locação do AIRBNB.
+*/
 
 with airbnb_covid as (
     select fta.mes_movimento,

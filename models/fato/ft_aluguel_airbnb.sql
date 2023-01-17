@@ -1,4 +1,9 @@
+/*
+    Processo de carga da Fato com as informações de aluguel do airbnb.
 
+    Esta fato funciona apenas para fazer uma relação no tempo entre imóvel, proprietário e bairro.
+    Não possui uma métrica.
+*/
 
 with review_listing as (
     select replace(r.date, '-', '') as DT_MOVIMENTO,

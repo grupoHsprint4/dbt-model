@@ -1,5 +1,7 @@
 /*
+    Processo para carga da informação de raça. 
 
+    A origem deste processo é o arquivo de COVID.
 */
 
 with raca_cor as (

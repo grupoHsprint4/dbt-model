@@ -1,9 +1,8 @@
 /*
-    Devido a uma limitação da origem em relação ao tamanho do arquivo, foi necessário a 
-    quebra dele em três partes.
+    Para esta implementação academia tivemos um problema na limitação por causa do tamanho 
+    do arquivo e tivemos que dividir a leitura em 3.
 
-    Essa etapa será para unir as três tabelas criadas para que possa ser feita o tratamento
-    em todas as partes do arquivo de uma vez.
+    Este processo tem como objetivo apenas juntar os três arquivos que deveriam ser apenas um.
 */
 
 with reviews_union as (

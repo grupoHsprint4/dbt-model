@@ -1,5 +1,7 @@
 /*
+    Processo para carga da informação de faixa etaria. 
 
+    A origem deste processo é o arquivo de COVID.
 */
 
 with faixa_etaria as (

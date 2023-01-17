@@ -1,5 +1,7 @@
 /*
+    Processo para carga da informação de imóveis. 
 
+    Tem como origem o arquivo listing do Inside Airbnb.
 */
 
 with houses as (

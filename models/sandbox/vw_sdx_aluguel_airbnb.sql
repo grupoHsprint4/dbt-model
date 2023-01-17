@@ -1,3 +1,8 @@
+/*
+    Processo de criação de uma view para estudo do comportamento das locações do airbnb.
+
+    Possibilita o estudo e criação de modelo de predição de preço.
+*/
 
 
 with dados_aluguel as (

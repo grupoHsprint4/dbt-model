@@ -1,7 +1,7 @@
 /*
+    Processo para carga da informação de proprietários. 
 
-
-
+    Tem como origem o arquivo listing do Inside Airbnb.
 */
 
 with host as (
