@@ -1,0 +1,37 @@
+version: 2
+
+sources:
+  - name: raw_data
+    schema: raw_schema
+    database: airbyte_database
+    
+    tables:
+      - name: dados_covid
+      - name: listing
+      - name: neighbourhood
+      - name: reviewpt1
+      - name: reviewpt2
+      - name: reviewpt3
+      - name: reviews
+  
+  - name: dw_data
+    schema: dw_schema
+    database: airbyte_database
+
+    tables:
+      - name: dim_bairro
+      - name: dim_faixa_etaria
+      - name: dim_imovel
+      - name: dim_proprietario
+      - name: dim_raca
+      - name: dim_sexo
+      - name: ft_contagio
+      - name: ft_aluguel_airbnb
+      - name: ft_contagio_mes
+      - name: ft_aluguel_airbnb_mes
+
+
+models:
+  - name: reviews
+
+  
