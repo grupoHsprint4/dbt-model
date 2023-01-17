@@ -10,7 +10,8 @@ with aluguel_mes as (
            id_proprietario,
            id_bairro,
            count(*) as qtd_locacoes
-      from {{ source('dw_data', 'ft_aluguel_airbnb') }}
+      --from {{ source('dw_data', 'ft_aluguel_airbnb') }}
+      from {{ ref('ft_aluguel_airbnb') }}
       group by substr(DT_MOVIMENTO, 1, 6) ,
            id_imovel,
            id_proprietario,

@@ -93,7 +93,7 @@ sources:
             description: Comentário inserido no sistema pelo locatário.
   
   - name: dw_data
-    schema: airbyte_schema
+    schema: dw_schema
     database: airbyte_database
     description: Schema para criação do Data Warehouse.
 
