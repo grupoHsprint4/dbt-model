@@ -4,15 +4,93 @@ sources:
   - name: raw_data
     schema: raw_schema
     database: airbyte_database
+    description: Schema com as informações extraidas pelo Airbyte.
     
     tables:
       - name: dados_covid
+        description: informações de covid do estado do Rio de Janeiro
+        columns:
+          - name: classificacao_final
+            description: mostra a classificação dos casos. Casos confirmados são marcados como CONFIRMADOS.
+          - name: dt_notific
+            description: data em que foi feita a notificação do caso, em formato mm/dd/aa.
+          - name: dt_inicio_sintomas
+            description: data relatada do início dos sintomas, em formato mm/dd/aa.
+          - name: bairro_resid_estadia
+            description: bairro de residência ou estadia do paciente usando a lista oficial de bairros do município do Rio de Janeiro.
+          - name: ap_residencia_estadia
+            description: Área de Planejamento em Saúde correspondente ao bairro de residência ou estadia do paciente.
+          - name: faixa_etaria
+            description: Faixa etária em que se encontra o paciente.
+          - name: evolucao
+            description: evolução do caso, podendo ser ativo, óbito ou recuperado.
+          - name: dt_evolucao
+            description: data em que ocorreu a evolução do quadro, podendo ser a data de óbito ou a data de alta/cura, em formato mm/dd/aa.
+          - name: raca_cor
+            description: raça/cor do paciente.
+          - name: Data_atualizacao
+            description: data a que se referem os dados, em formato mm/dd/aa.
+          - name: sistema
+            description: sistema de origem do registro, podendo ser e-SUS para os casos leves e SIVEP-Gripe para os casos de internação e óbitos.
+
       - name: listing
+
+
       - name: neighbourhood
+        description: tabela com as informações de bairro do estado do Rio de Janeiro.
+        columns:
+          - name: neighbourhood_group
+            description: identificador do grupo do bairro.
+          - name: neighbourhood
+            description: nome do bairro.
+
       - name: reviewpt1
+        description: tabela de avaliação dos locatárias do airbnb. Por problema técnico do Drive, nesta solução foi necessário  dividi-la em três tabelas.
+        columns:
+          - name: listing_id
+            description: Identificador único do imóvel.
+          - name: id
+            description: Identificador único da avaliação do imóvel pelo locatário.
+          - name: date
+            description: Data que foi realizada a avaliação.
+          - name: reviewer_id
+            description: Identificador único do locatário.
+          - name: reviewer_name
+            description: Nome do locatário.
+          - name: comments
+            description: Comentário inserido no sistema pelo locatário.
+
       - name: reviewpt2
+        description: tabela de avaliação dos locatárias do airbnb. Por problema técnico do Drive, nesta solução foi necessário  dividi-la em três tabelas.
+        columns:
+          - name: listing_id
+            description: Identificador único do imóvel.
+          - name: id
+            description: Identificador único da avaliação do imóvel pelo locatário.
+          - name: date
+            description: Data que foi realizada a avaliação.
+          - name: reviewer_id
+            description: Identificador único do locatário.
+          - name: reviewer_name
+            description: Nome do locatário.
+          - name: comments
+            description: Comentário inserido no sistema pelo locatário.
+
       - name: reviewpt3
-      - name: reviews
+        description: tabela de avaliação dos locatárias do airbnb. Por problema técnico do Drive, nesta solução foi necessário  dividi-la em três tabelas.
+        columns:
+          - name: listing_id
+            description: Identificador único do imóvel.
+          - name: id
+            description: Identificador único da avaliação do imóvel pelo locatário.
+          - name: date
+            description: Data que foi realizada a avaliação.
+          - name: reviewer_id
+            description: Identificador único do locatário.
+          - name: reviewer_name
+            description: Nome do locatário.
+          - name: comments
+            description: Comentário inserido no sistema pelo locatário.
   
   - name: dw_data
     schema: airbyte_schema
@@ -20,17 +98,166 @@ sources:
 
     tables:
       - name: dim_bairro
-      - name: dim_faixa_etaria
-      - name: dim_imovel
-      - name: dim_proprietario
-      - name: dim_raca
-      - name: dim_sexo
-      - name: ft_contagio
-      - name: ft_aluguel_airbnb
-      - name: ft_contagio_mes
-      - name: ft_aluguel_airbnb_mes
-      - name: reviews
+        description: Dimensão que contém informações dos bairros. Tem origem do arquivo de neighbourbood do COVID e do Inside Airbnb.
+        columns:
+          - name: id_bairro
+            description: Chave única que identifica o registro. Formada a partir da função md5 no campo de descrição.
+          - name: desc_bairro
+            description: Campo com o nome do bairro tratado, sem acento e em maiusculo.
 
+      - name: dim_faixa_etaria
+        description: Dimensão que contém informações da faixa etária. Tem origem no arquivo do COVID.
+        columns:
+          - name: id_faixa_etaria
+            description: Chave única que identifica o registro. Formada a partir da função md5 no campo de descrição.
+          - name: desc_faixa_etaria
+            description: Campo que contém a descrição da faixa etária.
+
+      - name: dim_imovel
+        description: Dimensão que contém informações dos imóveis do site do Airbnb que foram varridos pela aplicação.
+        columns:
+          - name: id_imovel
+            description: Chave única que identica o imóvel.
+          - name: desc_imóvel
+            description: Campo que tem a descrição que o proprietário faz do imóvel.
+          - name: qtd_cama
+            description: Informa a quantidade de camas que o imóvel possui.
+          - name: qtd_quarto
+            description:  Informa a quantidade de quartos que o imóvel possui.
+          - name: banheiro
+            description: Informa quantos banheiro o imóvel possui e se são privados ou compartilhados.
+          - name: tipo_quarto
+            description: Informa o tipo de imóvel. Se é um quarto privado, apartamento inteiro, quarto compartilhado...
+          - name: qtd_max_pessoas
+            description: Informa a quantidade máxima de pessoas permitidas.
+          - name: bairro
+            description: Nome do bairro que o imóvel fica localizado.
+          - name: facilidades
+            description: Informa uma lista de facilidade que o imóvel possui.
+          - name: longitude
+            description:  Longitude do imóvel.
+          - name: latitude
+            description: Latitude do imóvel.
+          - name: qtd_min_noites
+            description: Quantidade minimo de noites para alugar o imóvel.
+          - name: qtd_max_noites
+            description: Quantidade máxima de noites para alugar o imóvel.
+          - name: preco
+            description: Valor da diária do imóvel.
+
+      - name: dim_proprietario
+        description: Dimensão que contém as informações dos proprietarios.
+        columns:
+          - name: id_proprietario
+            description: Chave única que identica o proprietario.
+          - name: desc_proprietario
+            description: Nome do Proprietário.
+          - name: fl_superhost
+            description: Informa se o proprietário é classificado como Superhost.
+          - name: fl_identidade_verificada
+            description: Informa se a identidade do proprietário é verificada pelo sistema.
+
+      - name: dim_raca
+        description: Dimensão que contém a informação da raça/cor do proprietario.
+        columns: 
+          - name: id_raca
+            description: Chave única que identifica a raça do proprietario. Formada a partir da função md5 no campo de descrição.
+          - name: desc_raca
+            description: Campo que contém a descrição da raça.
+
+      - name: dim_sexo
+        description: Dimensão que contém a informação do sexo do proprietario.
+        columns:
+          - name: id_raca
+            description: Chave única que identifica o sexo do proprietario. Formada a partir da função md5 no campo de descrição.
+          - name: desc_raca
+            description: Campo que contém a descrição da sexo.
+
+      - name: ft_contagio
+        description: Fato que contém informação sobre a quantidade de casos de COVID por dia.
+        columns:
+          - name: dt_movimento
+            description: Dia que está sendo avaliado a quantidade de casos.
+          - name: id_bairro
+            description: Chave única que identifica o bairro.
+          - name: id_faixa_etaria
+            description: Chave única que identifica a faixa etaria.
+          - name: id_raca
+            description: Chave única que identifica a raça.
+          - name: id_sexo
+            description: Chave única que identifica o sexo.
+          - name: qt_casos
+            description: Quantidade de casos notificados naquele dia.
+          - name: qt_com_covid
+            description: Quantidade de casos com covid a partir do dia da notificação.
+          - name: qt_mortes
+            description: Quantidade de casos de morte a partir do dia da notificação.
+          - name: qt_recuperados
+            description: Quantidade de casos de recuperação a partir do dia da notificação.
+
+      - name: ft_aluguel_airbnb
+        description: Fato que contém informação dos alugeis da plataforma do airbnb no dia.
+        columns:
+          - name: dt_movimento
+            description: Dia que o imóvel está sendo alugado.
+          - name: id_bairro
+            description: Chave única que identifica o bairro.
+          - name: id_imovel
+            description: Chave única que identifica o imovel.
+          - name: id_proprietario
+            description: Chave única que identifica o proprietário.
+
+      - name: ft_contagio_mes
+        description: Fato que contém informação sobre a quantidade de casos de COVID por mês.
+        columns:
+          - name: mês_movimento
+            description: Mês que está sendo avaliado a quantidade de casos.
+          - name: id_bairro
+            description: Chave única que identifica o bairro.
+          - name: id_faixa_etaria
+            description: Chave única que identifica a faixa etaria.
+          - name: id_raca
+            description: Chave única que identifica a raça.
+          - name: id_sexo
+            description: Chave única que identifica o sexo.
+          - name: qt_casos
+            description: Quantidade de casos notificados naquele dia.
+          - name: qt_com_covid
+            description: Quantidade de casos com covid a partir do dia da notificação.
+          - name: qt_mortes
+            description: Quantidade de casos de morte a partir do dia da notificação.
+          - name: qt_recuperados
+            description: Quantidade de casos de recuperação a partir do dia da notificação.
+
+      - name: ft_aluguel_airbnb_mes
+        description: Fato que contém informação dos alugeis da plataforma do airbnb fechado por mẽs.
+        columns:
+          - name: mes_movimento
+            description: Mês que o imóvel está sendo alugado.
+          - name: id_bairro
+            description: Chave única que identifica o bairro.
+          - name: id_imovel
+            description: Chave única que identifica o imovel.
+          - name: id_proprietario
+            description: Chave única que identifica o proprietário.      
+          - name: qtd_locacoes
+            description: Quantidade de locações no mês.
+
+      - name: reviews
+        description: tabela unificado das avaliações dos proprietarios.
+        columns:
+          - name: listing_id
+            description: Identificador único do imóvel.
+          - name: id
+            description: Identificador único da avaliação do imóvel pelo locatário.
+          - name: date
+            description: Data que foi realizada a avaliação.
+          - name: reviewer_id
+            description: Identificador único do locatário.
+          - name: reviewer_name
+            description: Nome do locatário.
+          - name: comments
+            description: Comentário inserido no sistema pelo locatário.
 
 models:
   - name: reviews

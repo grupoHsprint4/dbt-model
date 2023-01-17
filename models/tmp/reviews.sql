@@ -6,7 +6,6 @@
     em todas as partes do arquivo de uma vez.
 */
 
-
 with reviews_union as (
     select *
       from {{ source('raw_data', 'reviewpt1') }}
